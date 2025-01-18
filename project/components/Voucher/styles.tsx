@@ -35,6 +35,12 @@ export const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     color: '#555',
+    fontWeight: 'bold',
+    paddingBottom: 10
+  },
+  cost: {
+    fontSize: 16,
+    fontWeight: 'bold', 
   },
   row: {
     flexDirection: 'row',
@@ -67,6 +73,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
-    padding: 5
+    padding: 5,
+    backgroundColor: '#ff9e4d',
+    marginBottom: 10
   },
 });

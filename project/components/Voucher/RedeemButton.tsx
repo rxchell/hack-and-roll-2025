@@ -12,7 +12,7 @@ const RedeemButton: React.FC = () => {
 
     return (
         <Button
-            title="Buy/Redeem"
+            title="Buy / Redeem"
             onPress={handlePress}
             buttonStyle={styles.redeembutton}
         />

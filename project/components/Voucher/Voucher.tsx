@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { StyleSheet } from 'react-native'
 import { View, Text, Image, TouchableOpacity, FlatList, ActivityIndicator, } from 'react-native';
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import { styles } from './styles';
-import { render } from 'react-dom';
 import RedeemButton from './RedeemButton';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -86,9 +85,9 @@ export default function Voucher({ session }: { session: Session }) {
                     <View style={styles.row}>
                         <Text style={styles.name}>{item.name}</Text>
                     </View>
-                    <Text>Description: {item.description}</Text>
+                    <Text style={styles.description}>Description: {item.description}</Text>
                     <RedeemButton/>
-                    <Text>Cost: {item.cost}</Text>
+                    <Text style={styles.cost}>Cost: {item.cost}</Text>
                 </View>
                 <View style={styles.columnRight}>
                     <Ionicons name={icon} size={90}></Ionicons>
