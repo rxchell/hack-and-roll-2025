@@ -9,6 +9,22 @@ export default function Payment() {
     const { initPaymentSheet, presentPaymentSheet } = useStripe(); 
     const [sucess, setSuccess] = useState<boolean>(false);
 
+    const confirmHandler = async (paymentMethod, shouldSavePaymentMethod, intentCreationCallback) => {
+        // Make a request to your own server.
+        const response = await fetch(`${API_URL}/create-intent`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+        }});
+        // Call the `intentCreationCallback` with your server response's client secret or error
+        const { client_secret, error } = await response.json();
+        if (client_secret) {
+          intentCreationCallback({clientSecret: client_secret});
+        } else {
+          intentCreationCallback({error});
+        }
+      }
+
     const initializePaymentSheet = async () => {
         const { error, paymentOption } = await initPaymentSheet({
             merchantDisplayName: "Example, Inc.",
