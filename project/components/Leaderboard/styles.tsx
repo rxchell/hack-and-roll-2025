@@ -1,6 +1,6 @@
-//import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-export const styles = {
+export const styles = StyleSheet.create({
     welcometext: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -14,4 +14,16 @@ export const styles = {
         fontSize: 14,
         color: 'gray',
     },
-};
+    username: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    lifetimePoints: {
+        fontSize: 14,
+        color: 'gray',
+    },
+    container: {
+        flex: 1,
+        padding: 20,
+    },
+});

@@ -119,8 +119,7 @@ export default function Leaderboard({ session }: { session: Session }) {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={styles.welcometext}>Leaderboard</Text>
+        <View style={styles.container}>
 
             {/* List of leaderboard users */}
             <FlatList
@@ -134,7 +133,7 @@ export default function Leaderboard({ session }: { session: Session }) {
                         />
                         <View>
                             <Text style={styles.username}>
-                                {item.username || `User ID: ${item.id}`}
+                                {item.username}
                             </Text>
                             <Text style={styles.lifetimePoints}>Lifetime Points: {item.lifetime_points}</Text>
                         </View>
