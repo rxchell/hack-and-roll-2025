@@ -61,7 +61,7 @@ export default function Order({ session }: { session: Session }) {
       }
     };
   
-    if (!orderId) {
+    if (!orderId || orderItems.length === 0) {
       return (
         <View style={styles.container}>
           <Text style={styles.errorText}>No order provided. Please add items into your order.</Text>
