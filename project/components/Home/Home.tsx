@@ -26,7 +26,7 @@ const FetchUsername = ({email, id}: {email: string | undefined, id: string | und
     return (
         <View>
         <Text style={styles.welcometext}>Welcome, {username}!</Text>
-        <Text>Want a drink or a snack? Bro has got you covered!</Text>
+        <Text style={styles.welcome}>Want a drink or a snack? Bro has got you covered!</Text>
         </View>
     )
 }
@@ -72,7 +72,8 @@ const SlidingWindow = () => {
 export default function Home({ session }: { session: Session }) {
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
-            <View style={{height: 200, marginBottom: 25}}>
+            <Image source={require('../../assets/brospot.png')} style={{ marginTop: 20, width: 180, height: 130 }}/>
+            <View style={{height: 200, marginTop: 20, marginBottom: 25}}>
                 <SlidingWindow/>
             </View>
             <FetchUsername email={session.user.email} id={session.user.id}/>
