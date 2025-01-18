@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     lifetimePoints: {
         fontSize: 14,
         color: 'gray',
+        fontWeight: 'bold',
     },
     container: {
         flex: 1,

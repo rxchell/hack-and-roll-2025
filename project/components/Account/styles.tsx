@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
     },
     profilepicturebutton: {
-        backgroundColor: '#499EE3',
+        backgroundColor: '#ff9e4d',
         padding: 5,
         borderRadius: 5,
         margin: 5,
