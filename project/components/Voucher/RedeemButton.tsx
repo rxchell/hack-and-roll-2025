@@ -21,9 +21,14 @@ const RedeemButton = ({cost, id, orderId, voucher_id}: {cost: number, id: string
                 .update({points: data?.points - cost })
                 .eq('id', id)
             }
+
+            console.log(2)
+            console.log(voucher_id)
+
             await supabase.from('Orders_testing')
                 .update({active_voucher: voucher_id })
                 .eq('id', orderId)
+            
             navigation.navigate('Order', { orderId });
         } catch (error) {
             console.log(error)

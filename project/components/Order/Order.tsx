@@ -24,16 +24,32 @@ export default function Order({ session }: { session: Session }) {
       
     const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
     const [loading, setLoading] = useState(true);
-    let totalCost;
+    const [totalCost, setTotalCost] = useState(0)
+
     useEffect(() => {
       console.log(orderId)
       if (orderId) {
         fetchOrderDetails();
       }
-    }, [orderId]);
+    }, [orderId, totalCost]);
 
     const total_text = () => {
-      return(<text>Total: ${totalCost}</text>)
+      return(<Text>Total: ${totalCost}</Text>)
+    }
+
+    const calculateCostWithVoucher = async (orderId: string, totalCost: number) => {
+      try {
+        const {data, error} = await supabase.from('Orders_testing')
+        .select('active_voucher').eq('id', orderId).single()
+
+        if (data?.active_voucher) {
+          return totalCost - 1
+        }
+        return totalCost
+
+      } catch (error) {
+        return totalCost
+      }
     }
     
     const fetchOrderDetails = async () => {
@@ -62,9 +78,14 @@ export default function Order({ session }: { session: Session }) {
   
         const menuItems = await Promise.all(menuItemsPromises);
         setOrderItems(menuItems);
-        totalCost = menuItems.reduce((sum, item) => {
+        
+        const totalCost = menuItems.reduce((sum, item) => {
           return sum + (item.Menu.cost * item.quantity);
         }, 0);
+
+        const finalTotalCost = await calculateCostWithVoucher(orderId, totalCost)
+
+        setTotalCost(finalTotalCost);
 
       } catch (error) {
         console.error('Error fetching order details:', error);

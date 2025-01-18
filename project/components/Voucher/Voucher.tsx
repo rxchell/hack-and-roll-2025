@@ -29,7 +29,7 @@ export default function Voucher({ session}: { session: Session }) {
     useEffect(() => {
         fetchUserVouchers(); 
         fetchUserPoints();
-    }, []);
+    }, [points]);
 
     async function fetchUserPoints() {
         if (!session?.user) throw new Error('No user on the session!')
@@ -80,9 +80,6 @@ export default function Voucher({ session}: { session: Session }) {
         ]
         const randomIndex = Math.floor(Math.random() * icons.length)
         const icon: IconName = icons[randomIndex]
-
-        console.log("Hi")
-        console.log(orderId)
 
         return (
             <View style={styles.voucher}>
