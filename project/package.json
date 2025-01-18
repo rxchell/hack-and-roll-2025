@@ -15,6 +15,7 @@
     "@react-navigation/native-stack": "^7.2.0",
     "@react-navigation/stack": "^7.1.1",
     "@rneui/themed": "^4.0.0-rc.8",
+    "@stripe/stripe-react-native": "^0.41.0",
     "@supabase/supabase-js": "^2.47.16",
     "dotenv": "^16.4.7",
     "expo": "~52.0.25",
@@ -31,7 +32,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-swiper": "^1.6.0-rc.3",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "stripe": "^17.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
