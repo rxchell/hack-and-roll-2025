@@ -24,14 +24,18 @@ export default function Order({ session }: { session: Session }) {
       
     const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
     const [loading, setLoading] = useState(true);
-  
+    let totalCost;
     useEffect(() => {
       console.log(orderId)
       if (orderId) {
         fetchOrderDetails();
       }
     }, [orderId]);
-  
+
+    const total_text = () => {
+      return(<text>Total: ${totalCost}</text>)
+    }
+    
     const fetchOrderDetails = async () => {
       try {
         const { data: orderItemsData, error: orderItemsError } = await supabase
@@ -58,6 +62,10 @@ export default function Order({ session }: { session: Session }) {
   
         const menuItems = await Promise.all(menuItemsPromises);
         setOrderItems(menuItems);
+        totalCost = menuItems.reduce((sum, item) => {
+          return sum + (item.Menu.cost * item.quantity);
+        }, 0);
+
       } catch (error) {
         console.error('Error fetching order details:', error);
       } finally {
@@ -72,7 +80,7 @@ export default function Order({ session }: { session: Session }) {
         </View>
       );
     }
-  
+    
     if (loading) {
       return <ActivityIndicator size="large" color="#ff9e4d" />;
     }
@@ -90,8 +98,12 @@ export default function Order({ session }: { session: Session }) {
               <Text style={styles.quantity}>Quantity: {item.quantity}</Text>
               <Text style={styles.ordercost}>Cost: ${item.Menu.cost * item.quantity}</Text>
             </View>
+            
           )}
         />
+        <View>
+          {total_text()}
+        </View>
         <VoucherButton orderId={orderId}/>
         {/* <Payment/> */}
       </View>
