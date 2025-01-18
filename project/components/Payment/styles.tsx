@@ -14,5 +14,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-    }
+    },
+    confirmButton: { backgroundColor: '#ff9e4d', padding: 16, borderRadius: 8, marginTop: 16, marginBottom: 50 },
 });

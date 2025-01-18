@@ -88,8 +88,6 @@ export default function App() {
                   iconName = focused ? 'podium' : 'podium-outline';
                 } else if (route.name === 'Voucher') {
                   iconName = focused ? 'cash' : 'cash-outline';
-                } else if (route.name === 'Payment') {
-                  iconName = focused ? 'card' : 'card-outline';
                 }
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
@@ -101,7 +99,6 @@ export default function App() {
             <Tab.Screen name="Order" children={() => <OrderScreen session={session} />} />
             <Tab.Screen name="Account" children={() => <AccountScreen session={session} />} />
             <Tab.Screen name="Menu" children={() => <MenuScreen session={session} />} />
-            <Tab.Screen name="Payment" children={() => <PaymentScreen session={session} />} />
             <Tab.Screen name="Voucher" children={() => <VoucherScreen session={session} />} />
             <Tab.Screen name="Leaderboard" children={() => <LeaderboardScreen session={session} />} />
           </Tab.Navigator>
