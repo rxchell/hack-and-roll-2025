@@ -4,6 +4,7 @@
       "slug": "hack-and-roll",
       "version": "1.0.0",
       "orientation": "portrait",
+      "scheme": "brospot",
       "icon": "./assets/brospot.png",
       "userInterfaceStyle": "light",
       "newArchEnabled": true,
