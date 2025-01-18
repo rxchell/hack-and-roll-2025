@@ -6,6 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import { styles } from './styles';
 import ConfirmOrderButton from './ConfirmOrderButton';
 import Payment from '../Payment/Payment';
+import VoucherButton from '../Voucher/VoucherButton';
 
 export default function Order({ session }: { session: Session }) {
 
@@ -89,6 +90,7 @@ export default function Order({ session }: { session: Session }) {
             </View>
           )}
         />
+        <VoucherButton orderID={orderId}/>
         <Payment/>
       </View>
     );

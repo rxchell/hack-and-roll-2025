@@ -79,6 +79,7 @@ const BottomTabNavigator = ({ session }: { session: Session }) => (
     <Tab.Screen name="Order" children={() => <OrderScreen session={session} />} />
     <Tab.Screen name="Account" children={() => <AccountScreen session={session} />} />
     <Tab.Screen name="Leaderboard" children={() => <LeaderboardScreen session={session} />} />
+    <Tab.Screen name="Voucher" children={() => <VoucherScreen session={session} />} />
   </Tab.Navigator>
 );
 

@@ -7,6 +7,7 @@ import { Session } from '@supabase/supabase-js'
 import { styles } from './styles';
 import RedeemButton from './RedeemButton';
 import { Ionicons } from '@expo/vector-icons';
+import { useRoute } from '@react-navigation/native';
 
 interface Voucher {
     id: number
@@ -17,7 +18,10 @@ interface Voucher {
     cost: number
 }
 
-export default function Voucher({ session }: { session: Session }) {
+export default function Voucher({ session}: { session: Session }) {
+    const route = useRoute();
+    const { orderId } = route.params as { orderId: string } || {};  
+
     const [vouchers, setVouchers] = useState<Voucher[]>([])
     const [loading, setLoading] = useState(true)
     const [points, setPoints] = useState(0)
@@ -79,6 +83,9 @@ export default function Voucher({ session }: { session: Session }) {
         const randomIndex = Math.floor(Math.random() * icons.length)
         const icon: IconName = icons[randomIndex]
 
+        console.log("Hi")
+        console.log(orderId)
+
         return (
             <View style={styles.voucher}>
                 <View style={styles.columnLeft}>
@@ -86,7 +93,7 @@ export default function Voucher({ session }: { session: Session }) {
                         <Text style={styles.name}>{item.name}</Text>
                     </View>
                     <Text style={styles.description}>Description: {item.description}</Text>
-                    <RedeemButton/>
+                    <RedeemButton cost={item.cost} id={session.user.id} orderID={orderId}/>
                     <Text style={styles.cost}>Cost: {item.cost}</Text>
                 </View>
                 <View style={styles.columnRight}>

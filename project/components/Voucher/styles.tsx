@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 28,
     marginRight: 16,
   },
-  redeembutton: {
+  button: {
     width: 150,
     height: 40,
     borderRadius: 5,
@@ -77,4 +77,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ff9e4d',
     marginBottom: 10
   },
+  redeembutton: {
+    backgroundColor: '#ff9e4d',
+    padding: 20,
+    borderRadius: 10,
+    margin: 16,
+    width: -50
+  }
 });
