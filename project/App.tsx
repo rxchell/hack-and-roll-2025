@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './components/Home/Home'
 import Order from './components/Order/Order'
+import React from 'react'
 
 const Tab = createBottomTabNavigator();
 
