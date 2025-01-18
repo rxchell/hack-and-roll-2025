@@ -58,9 +58,7 @@ export default function Voucher({ session}: { session: Session }) {
                 id, name, description, type, discount, cost
             `)
 
-            
             if (data != null) {
-
                 setVouchers(data)   
             }
 
