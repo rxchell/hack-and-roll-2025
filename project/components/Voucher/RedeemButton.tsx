@@ -5,7 +5,7 @@ import { styles } from './styles';
 import { supabase } from '../../lib/supabase';
 import { userInfo } from 'os';
 
-const RedeemButton = ({cost, id, orderId}: {cost: number, id: string, orderId: string}) => {
+const RedeemButton = ({cost, id, orderId, voucher_id}: {cost: number, id: string, orderId: string, voucher_id: number}) => {
     const navigation = useNavigation();
 
     const handlePress = async () => {
@@ -21,7 +21,9 @@ const RedeemButton = ({cost, id, orderId}: {cost: number, id: string, orderId: s
                 .update({points: data?.points - cost })
                 .eq('id', id)
             }
-    
+            await supabase.from('Orders_testing')
+                .update({active_voucher: voucher_id })
+                .eq('id', orderId)
             navigation.navigate('Order', { orderId });
         } catch (error) {
             console.log(error)

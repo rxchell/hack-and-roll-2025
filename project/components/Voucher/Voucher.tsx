@@ -93,7 +93,7 @@ export default function Voucher({ session}: { session: Session }) {
                         <Text style={styles.name}>{item.name}</Text>
                     </View>
                     <Text style={styles.description}>Description: {item.description}</Text>
-                    <RedeemButton cost={item.cost} id={session.user.id} orderId={orderId}/>
+                    <RedeemButton cost={item.cost} id={session.user.id} orderId={orderId} voucher_id={item.id}/>
                     <Text style={styles.cost}>Cost: {item.cost}</Text>
                 </View>
                 <View style={styles.columnRight}>
