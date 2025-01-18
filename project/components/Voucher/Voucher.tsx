@@ -93,7 +93,7 @@ export default function Voucher({ session}: { session: Session }) {
                         <Text style={styles.name}>{item.name}</Text>
                     </View>
                     <Text style={styles.description}>Description: {item.description}</Text>
-                    <RedeemButton cost={item.cost} id={session.user.id} orderID={orderId}/>
+                    <RedeemButton cost={item.cost} id={session.user.id} orderId={orderId}/>
                     <Text style={styles.cost}>Cost: {item.cost}</Text>
                 </View>
                 <View style={styles.columnRight}>
@@ -104,7 +104,7 @@ export default function Voucher({ session}: { session: Session }) {
     }
 
     if (loading) {
-        return <Text>Loading menu...</Text>;
+        return <Text>Loading vouchers...</Text>;
     }
 
     return (

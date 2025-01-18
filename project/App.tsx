@@ -13,7 +13,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './components/Home/Home'
 import Order from './components/Order/Order'
-import Payment from './components/Payment/Payment'
+// import Payment from './components/Payment/Payment'
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

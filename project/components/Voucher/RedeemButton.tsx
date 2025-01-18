@@ -5,11 +5,12 @@ import { styles } from './styles';
 import { supabase } from '../../lib/supabase';
 import { userInfo } from 'os';
 
-const RedeemButton = ({cost, id, orderID}: {cost: number, id: string, orderID: string}) => {
+const RedeemButton = ({cost, id, orderId}: {cost: number, id: string, orderId: string}) => {
     const navigation = useNavigation();
 
     const handlePress = async () => {
         try {
+            console.log(orderId)
             const {data, error} = await supabase.from('users')
             .select('points').eq('id', id).single()
     
@@ -21,7 +22,7 @@ const RedeemButton = ({cost, id, orderID}: {cost: number, id: string, orderID: s
                 .eq('id', id)
             }
     
-            navigation.navigate('Order', {orderID});
+            navigation.navigate('Order', { orderId });
         } catch (error) {
             console.log(error)
         }
