@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth/Auth'
@@ -15,6 +16,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './components/Home/Home'
 import Order from './components/Order/Order'
+import Payment from './components/Payment/Payment'
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +39,11 @@ function VoucherScreen({ session }: { session: Session}) {
 function OrderScreen({ session }: { session: Session }) {
   return <Order session={session} />;
 }
+
+function PaymentScreen({ session }: { session: Session }) {
+  return <Payment session={session} />;
+}
+
 function PopularScreen({ session }: { session: Session }) {
   return <Popular session={session} />;
 }
@@ -81,6 +88,8 @@ export default function App() {
                   iconName = focused ? 'podium' : 'podium-outline';
                 } else if (route.name === 'Voucher') {
                   iconName = focused ? 'cash' : 'cash-outline';
+                } else if (route.name === 'Payment') {
+                  iconName = focused ? 'card' : 'card-outline';
                 }
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
@@ -92,6 +101,7 @@ export default function App() {
             <Tab.Screen name="Order" children={() => <OrderScreen session={session} />} />
             <Tab.Screen name="Account" children={() => <AccountScreen session={session} />} />
             <Tab.Screen name="Menu" children={() => <MenuScreen session={session} />} />
+            <Tab.Screen name="Payment" children={() => <PaymentScreen session={session} />} />
             <Tab.Screen name="Voucher" children={() => <VoucherScreen session={session} />} />
             <Tab.Screen name="Leaderboard" children={() => <LeaderboardScreen session={session} />} />
           </Tab.Navigator>
