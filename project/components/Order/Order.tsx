@@ -10,7 +10,7 @@ import VoucherButton from '../Voucher/VoucherButton';
 
 export default function Order({ session }: { session: Session }) {
     const route = useRoute();
-    const { orderId } = route.params as { orderId: string } || {};
+    let { orderId } = route.params as { orderId: string } || {};
 
     interface OrderItem {
         menuItem_id: string;
@@ -27,14 +27,16 @@ export default function Order({ session }: { session: Session }) {
     const [totalCost, setTotalCost] = useState(0)
 
     useEffect(() => {
-      console.log(orderId)
       if (orderId) {
-        fetchOrderDetails();
+        const interval = setInterval(() => {
+          fetchOrderDetails(); // Fetch details periodically
+        }, 1000); 
+        return () => clearInterval(interval);
       }
     }, [orderId, totalCost]);
 
     const total_text = () => {
-      return(<Text>Total: ${totalCost}</Text>)
+      return(<Text style={styles.totalCost}>Total: ${totalCost.toFixed(2)}</Text>)
     }
 
     const calculateCostWithVoucher = async (orderId: string, totalCost: number) => {
@@ -54,39 +56,46 @@ export default function Order({ session }: { session: Session }) {
     
     const fetchOrderDetails = async () => {
       try {
-        const { data: orderItemsData, error: orderItemsError } = await supabase
-          .from('OrderItems_testing')
-          .select('menuItem_id, quantity')
-          .eq('order_id', orderId);
-  
-        if (orderItemsError) throw new Error(orderItemsError.message);
-  
-        const menuItemsPromises = orderItemsData.map(async (orderItem) => {
-          const { data: menuItemData, error: menuItemError } = await supabase
-            .from('Menu')
-            .select('name, cost')
-            .eq('id', orderItem.menuItem_id)
-            .single();
-  
-          if (menuItemError) throw new Error(menuItemError.message);
-  
-          return {
-            ...orderItem,
-            Menu: menuItemData,
-          };
-        });
-  
-        const menuItems = await Promise.all(menuItemsPromises);
-        setOrderItems(menuItems);
-        
-        const totalCost = menuItems.reduce((sum, item) => {
-          return sum + (item.Menu.cost * item.quantity);
-        }, 0);
+        const {data: status, error} = await supabase.from('Orders_testing')
+              .select('payment_completed').eq('id', orderId).single()
 
-        const finalTotalCost = await calculateCostWithVoucher(orderId, totalCost)
+        if (status?.payment_completed == true) {
+          // clear order
+          orderId = ''
+        } else if (orderId != '') {
+          const { data: orderItemsData, error: orderItemsError } = await supabase
+            .from('OrderItems_testing')
+            .select('menuItem_id, quantity')
+            .eq('order_id', orderId);
+    
+          if (orderItemsError) throw new Error(orderItemsError.message);
+    
+          const menuItemsPromises = orderItemsData.map(async (orderItem) => {
+            const { data: menuItemData, error: menuItemError } = await supabase
+              .from('Menu')
+              .select('name, cost')
+              .eq('id', orderItem.menuItem_id)
+              .single();
+    
+            if (menuItemError) throw new Error(menuItemError.message);
+    
+            return {
+              ...orderItem,
+              Menu: menuItemData,
+            };
+          });
+    
+          const menuItems = await Promise.all(menuItemsPromises);
+          setOrderItems(menuItems);
+          
+          const totalCost = menuItems.reduce((sum, item) => {
+            return sum + (item.Menu.cost * item.quantity);
+          }, 0);
 
-        setTotalCost(finalTotalCost);
+          const finalTotalCost = await calculateCostWithVoucher(orderId, totalCost)
 
+          setTotalCost(finalTotalCost);
+        }
       } catch (error) {
         console.error('Error fetching order details:', error);
       } finally {
