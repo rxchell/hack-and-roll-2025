@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Order from './Order';
 
 export const styles = StyleSheet.create({
   container: {
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   totalCost: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
   },
 
@@ -104,7 +105,7 @@ export const styles = StyleSheet.create({
   // order confirmation button 
   confirmButton: { backgroundColor: '#ff9e4d', padding: 16, borderRadius: 8, marginTop: 16, marginBottom: 50 },
 
-  totalCost: { fontSize: 16, fontWeight: 'bold', marginBottom: 16 },
+  orderListContainer: { maxHeight: 200 },
 
   voucherInfo: { fontSize: 16, color: 'gray', marginBottom: 16 },
 });
