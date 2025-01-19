@@ -13,7 +13,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Home from './components/Home/Home'
 import Order from './components/Order/Order'
-import Payment from './components/Payment/Payment'
+import { StripeProvider } from "@stripe/stripe-react-native";
+import Stripe from 'stripe'
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -114,9 +115,11 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <RootStackNavigator session={session} />
-    </NavigationContainer>
+    <StripeProvider publishableKey={process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY!}>
+      <NavigationContainer>
+        <RootStackNavigator session={session} />
+      </NavigationContainer>
+    </StripeProvider>
   );
 }
 
