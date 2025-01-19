@@ -99,4 +99,8 @@ export const styles = StyleSheet.create({
 
   // order confirmation button 
   confirmButton: { backgroundColor: '#ff9e4d', padding: 16, borderRadius: 8, marginTop: 16, marginBottom: 50 },
+
+  totalCost: { fontSize: 16, fontWeight: 'bold', marginBottom: 16 },
+
+  voucherInfo: { fontSize: 16, color: 'gray', marginBottom: 16 },
 });
