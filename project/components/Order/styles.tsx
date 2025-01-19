@@ -36,6 +36,10 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  totalCost: {
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
 
   //category of menu items
   categoryContainer: {
